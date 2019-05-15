@@ -1,1 +1,28 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Password Generator</title>
+    <meta name="description" content="Generates a secure password">
+    <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="C:\Users\Period 5\Documents\Password Generator Site\styles\main.css" type="text/css">
+  </head>
+  <body>
+    <h1 id="title">Password Generator</h1>
+    <button id="passgen" onclick="generatePassword(8);">Generate Password</button>
+    <h2 id="passwordDisplay">Password</h2>
+  </body>
+  <script>
+    document.getElementById("passwordDisplay").innerHTML = password;
+    function generatePassword(length) {
+    var password = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       password += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return password;
+    }
+  </script>
+</html>
