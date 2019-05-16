@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Password Generator</title>
     <meta name="description" content="Generates a secure password">
-    <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
   </head>
+  <style>
+      body {
+          margin: 0;
+          font-family: sans-serif;
+          text-align: center;
+      }
+  </style>
   <body>
     <h1 id="title">Password Generator</h1>
-    <button id="passgen" onclick="generatePassword(8);">Generate Password</button>
-    <h2 id="passwordDisplay">Password</h2>
+    <button id="passwordGenerateButton" onclick="generatePassword();">Generate Password</button>
+    <select id="lengthDropdown">
+        <option value="8">8 characters</option>
+        <option value="16">16 characters</option>
+        <option value="32">32 characters</option>
+        <option value="64">64 characters</option>
+    </select>
+    <p id="passwordDisplay">Password</p>
   </body>
   <script>
-    document.getElementById("passwordDisplay").innerHTML = password;
-    function generatePassword(length) {
-    var password = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       password += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return password;
+    function generatePassword() {
+        var length = "8";
+        var length = document.getElementById("lengthDropdown").value;
+        var password = "";
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            password += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        document.getElementById("passwordDisplay").innerHTML = password;
     }
   </script>
 </html>
