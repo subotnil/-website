@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="utf-8">
-        <title>HSIMP Demo</title>
+        <title>Password Generator</title>
 
         <style>
             body {
@@ -12,15 +12,6 @@
                 font-weight: 300;
                 margin: 0;
                 text-align: center;
-            }
-
-            footer {
-                position: fixed;
-                width: 100%;
-                bottom: 0;
-                background-color: black;
-                color: white;
-                padding: 30px;
             }
 
             input {
@@ -60,27 +51,48 @@
                 margin-top: 0;
                 font-size: 0.7em;
             }
+
+            div#checker-box {
+                color: white;
+                border-radius: 30px;
+                background-color: black;
+                margin-left: 4vw;
+                margin-right: 4vw;
+                padding-top: 4vw;
+                padding-bottom: 3vw;
+            }
+
+            h5 {
+                margin-top: 1vw;
+                font-size: 1vw;
+            }
         </style>
 
         <link rel="stylesheet" href="hsimp.css">
     </head>
     <body>
-        <h1 id="title">Password Generator</h1>
+        <h1 style="margin-top: 10vw;" id="title">Generate Password</h1>
         <button id="passwordGenerateButton" onclick="generatePassword();">Generate Password</button>
+
+        <!-- Dropdown to select length -->
         <select id="lengthDropdown">
             <option value="8">8 characters</option>
             <option value="16">16 characters</option>
             <option value="32">32 characters</option>
             <option value="64">64 characters</option>
         </select>
-        <p id="passwordDisplay">Password</p>
-        <label>Password</label>
-        <input id="password-box" type="password" />
-        <div id="password-time" class="hsimp-time"></div>
-        <ul id="password-checks" class="hsimp-checks"></ul>
-        <footer>
-            Passworker Checker Copyright (c) 2015, Mark Nicholas Wales / Small Hadron Collider 
-        </footer>
+        <button id="specialCharactersButton" onclick="specialCharactersButtonClicked();"> Use Special Characters</button>
+        <p style ="display: none;" id="passwordDisplay">Password</p>
+
+        <!-- Password Checker -->
+        <h1 id="title">Check Password</h1>
+        <div id="checker-box">
+            <label>Enter Password</label>
+            <input id="password-box" type="password" />
+            <div id="password-time" class="hsimp-time"></div>
+            <ul id="password-checks" class="hsimp-checks"></ul>
+            <h5>Copyright (c) 2015, Mark Nicholas Wales / Small Hadron Collider</h5>
+        </div>
 
         <script src="hsimp.min.js"></script>
         <script>
@@ -139,12 +151,35 @@
                 var length = "8";
                 var length = document.getElementById("lengthDropdown").value;
                 var password = "";
-                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                if (clicked == true) {
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
+                } else {
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                }
+                
                 var charactersLength = characters.length;
                 for ( var i = 0; i < length; i++ ) {
                     password += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
                 document.getElementById("passwordDisplay").innerHTML = password;
+                var x = document.getElementById("passwordDisplay");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "block";
+                }            
+            }
+            var clicked = false;
+            function specialCharactersButtonClicked() {
+                if (clicked == false) {
+                    document.getElementById("specialCharactersButton").style.backgroundColor = "black";
+                    document.getElementById("specialCharactersButton").style.color = "white";
+                    clicked = true;
+                } else {
+                    document.getElementById("specialCharactersButton").style.backgroundColor = "white";
+                    document.getElementById("specialCharactersButton").style.color = "black";
+                    clicked = false;
+                } 
             }
         </script>
     </body>
