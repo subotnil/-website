@@ -116,6 +116,7 @@
         </select>
         <button id="specialCharactersButton" onclick="specialCharactersButtonClicked();"> Use Special Characters</button>
         <p style ="display: none;" id="passwordDisplay">Password</p>
+        <p id="passwordListDisplay">Password</p>
 
         <!-- Password Checker -->
         <h1 id="title">Check Password</h1>
@@ -184,23 +185,26 @@
                 var length = "8";
                 var length = document.getElementById("lengthDropdown").value;
                 var password = "";
+                var passwordList = [];
                 if (clicked == true) {
                     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
                 } else {
                     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 }
-                
                 var charactersLength = characters.length;
                 for ( var i = 0; i < length; i++ ) {
                     password += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
                 document.getElementById("passwordDisplay").innerHTML = password;
+                passwordList.push(password);
+                document.getElementById("passwordListDisplay").innerHTML = passwordList;
                 var x = document.getElementById("passwordDisplay");
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
                     x.style.display = "block";
-                }            
+                }
+                console.log(passwordList);        
             }
             var clicked = false;
             function specialCharactersButtonClicked() {
