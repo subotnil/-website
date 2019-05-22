@@ -66,6 +66,18 @@
                 margin-top: 1vw;
                 font-size: 1vw;
             }
+            button {
+                border-radius: 30px;
+                background-color: white;
+                color: black;
+                border: 1px black solid;
+            }
+            select {
+                border-radius: 30px;
+                background-color: white;
+                color: black;
+                border: 1px black solid;
+            }
         </style>
 
         <link rel="stylesheet" href="hsimp.css">
@@ -76,10 +88,10 @@
 
         <!-- Dropdown to select length -->
         <select id="lengthDropdown">
-            <option value="8">8 characters</option>
-            <option value="16">16 characters</option>
-            <option value="32">32 characters</option>
-            <option value="64">64 characters</option>
+            <option value="8">8 Characters</option>
+            <option value="16">16 Characters</option>
+            <option value="32">32 Characters</option>
+            <option value="64">64 Characters</option>
         </select>
         <button id="specialCharactersButton" onclick="specialCharactersButtonClicked();"> Use Special Characters</button>
         <p style ="display: none;" id="passwordDisplay">Password</p>
