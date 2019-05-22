@@ -6,6 +6,21 @@
         <title>Password Generator</title>
 
         <style>
+            @media only screen and (max-width: 600px) { 
+                h1 {
+                    font-size: 7vw;
+                }
+                button {
+                    font-size: 3vw;
+                }
+                select {
+                    font-size: 3vw;
+                }
+                #passwordDisplay {
+                    font-size: 4vw;
+                }
+            }
+
             body {
                 font-family: sans-serif;
                 font-size: 1em;
@@ -67,12 +82,18 @@
                 font-size: 1vw;
             }
             button {
+                display: inline-block;
                 border-radius: 30px;
                 background-color: white;
                 color: black;
                 border: 1px black solid;
             }
+            button:active {
+                background-color: black;
+                color: white;
+            }
             select {
+                display: inline-block;
                 border-radius: 30px;
                 background-color: white;
                 color: black;
