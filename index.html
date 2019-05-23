@@ -99,6 +99,14 @@
                 color: black;
                 border: 1px black solid;
             }
+
+            #passwordDisplay {
+                font-weight: bold;
+            }
+
+            #saveToFileButton {
+                display: none;
+            }
         </style>
 
         <link rel="stylesheet" href="hsimp.css">
@@ -116,7 +124,8 @@
         </select>
         <button id="specialCharactersButton" onclick="specialCharactersButtonClicked();"> Use Special Characters</button>
         <p style ="display: none;" id="passwordDisplay">Password</p>
-        <p id="passwordListDisplay">Password</p>
+        <button id="SaveToFileButton" onclick="saveToFile();">Save To File</button>
+        <p id="passwordListDisplay"></p>
 
         <!-- Password Checker -->
         <h1 id="title">Check Password</h1>
@@ -187,7 +196,7 @@
                 var password = "";
                 var passwordList = [];
                 if (clicked == true) {
-                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
                 } else {
                     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 }
@@ -195,28 +204,27 @@
                 for ( var i = 0; i < length; i++ ) {
                     password += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
-                document.getElementById("passwordDisplay").innerHTML = password;
-                passwordList.push(password);
+                document.getElementById("passwordDisplay").innerHTML = password
                 document.getElementById("passwordListDisplay").innerHTML = passwordList;
-                var x = document.getElementById("passwordDisplay");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
+                var passwordShown = document.getElementById("passwordDisplay");
+                if (passwordShown.style.display === "none") {
+                    passwordShown.style.display = "block";
                 } else {
-                    x.style.display = "block";
+                    passwordShown.style.display = "block";
                 }
-                console.log(passwordList);        
+                var saveToFileShown = document.getElementById("saveToFileButton");   
+                if (saveToFileShown.style.display === "none") {
+                    saveToFileShown.style.display = "block";
+                } else {
+                    saveToFileShown.style.display = "block";
+                }
+                document.getElementById("SaveToFileButton").display = absolute;     
             }
             var clicked = false;
-            function specialCharactersButtonClicked() {
-                if (clicked == false) {
-                    document.getElementById("specialCharactersButton").style.backgroundColor = "black";
-                    document.getElementById("specialCharactersButton").style.color = "white";
-                    clicked = true;
-                } else {
-                    document.getElementById("specialCharactersButton").style.backgroundColor = "white";
-                    document.getElementById("specialCharactersButton").style.color = "black";
-                    clicked = false;
-                } 
+            function saveToFile() {
+                document.getElementById("SaveToFileButton").href = "data:attachment/text," + encodeURI(password);
+                document.getElementById("SaveToFileButton").download = "password.txt"
+                document.getElementById("SaveToFileButton").click();
             }
         </script>
     </body>
