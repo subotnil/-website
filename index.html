@@ -124,7 +124,7 @@
         </select>
         <button id="specialCharactersButton" onclick="specialCharactersButtonClicked();"> Use Special Characters</button>
         <p style ="display: none;" id="passwordDisplay">Password</p>
-        <button id="SaveToFileButton" onclick="saveToFile();">Save To File</button>
+        <button id="saveToFileButton" onclick="saveToFile();">Save Password To File</button>
         <p id="passwordListDisplay"></p>
 
         <!-- Password Checker -->
@@ -190,11 +190,11 @@
             }(this.document));
 
             // My code
+            var password = "";
             function generatePassword() {
                 var length = "8";
                 var length = document.getElementById("lengthDropdown").value;
-                var password = "";
-                var passwordList = [];
+                password = "";
                 if (clicked == true) {
                     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&()*+,-./:;<=>?@[\]^_`{|}~';
                 } else {
@@ -205,26 +205,42 @@
                     password += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
                 document.getElementById("passwordDisplay").innerHTML = password
-                document.getElementById("passwordListDisplay").innerHTML = passwordList;
                 var passwordShown = document.getElementById("passwordDisplay");
                 if (passwordShown.style.display === "none") {
                     passwordShown.style.display = "block";
                 } else {
                     passwordShown.style.display = "block";
                 }
-                var saveToFileShown = document.getElementById("saveToFileButton");   
-                if (saveToFileShown.style.display === "none") {
-                    saveToFileShown.style.display = "block";
-                } else {
-                    saveToFileShown.style.display = "block";
-                }
-                document.getElementById("SaveToFileButton").display = absolute;     
+                document.getElementById("saveToFileButton").style.display = "inline-block";
             }
             var clicked = false;
+            function specialCharactersButtonClicked() {
+                if (clicked == false) {
+                    document.getElementById("specialCharactersButton").style.backgroundColor = "black";
+                    document.getElementById("specialCharactersButton").style.color = "white";
+                    clicked = true;
+                } else {
+                    document.getElementById("specialCharactersButton").style.backgroundColor = "white";
+                    document.getElementById("specialCharactersButton").style.color = "black";
+                    clicked = false;
+                } 
+            }
+
+            //This is test code for downloading to file
+            var passwordNum = 1;
             function saveToFile() {
-                document.getElementById("SaveToFileButton").href = "data:attachment/text," + encodeURI(password);
-                document.getElementById("SaveToFileButton").download = "password.txt"
-                document.getElementById("SaveToFileButton").click();
+
+                var passName = prompt("Please enter the name of the account you will use this password for")
+                
+                var textToSave = password;
+                
+                var hiddenElement = document.createElement('a');
+
+                hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = passName + ' Password.txt';
+                passwordNum = passwordNum + 1;
+                hiddenElement.click();
             }
         </script>
     </body>
